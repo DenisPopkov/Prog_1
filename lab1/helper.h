@@ -39,7 +39,7 @@ ACTION getActionType(char type) {
 void callAction(ACTION action, char* firstNum, char* secondNum) {
     switch (action) {
     case ADDITION:
-        add(firstNum, secondNum, NOTATION);
+        additionNumbers(firstNum, secondNum, NOTATION);
         break;
     case DERIVATE:
         derivateNumbers(firstNum, secondNum);
