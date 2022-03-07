@@ -9,14 +9,12 @@ char* additionNumbers(char* firstNumber, char* secondNumber, unsigned short int 
     static char s[0];
     static char additionResult[0];
     int diff = abs(firstNumberLength - secondNumberLength);
-
-    for (int i = 1; i <= diff; i++)
-        strcat(s, "0");
-    
-    strrev(s);
     
     printf("First number - %s\n", firstNumber);
     printf("Second number - %s\n", secondNumber);
+
+    for (int i = 1; i <= diff; i++)
+        strcat(s, "0");
     
     int val1, val2, val3, c = 0;
     int currentLen = strlen(additionResult);
@@ -34,22 +32,33 @@ char* additionNumbers(char* firstNumber, char* secondNumber, unsigned short int 
 
         val3 = (val1 + val2 + c) % base; 
         c = (val1 + val2 + c) / base;
-        currentLen -= 1;
 
         if (val3 <= 9) {
+            currentLen -= 1;
             additionResult[currentLen] = val3 + '0';
         } else {
-            additionResult[++currentLen] = val3 + ('A' - 10);
+            currentLen -= 1;
+            additionResult[currentLen] = val3 + ('A' - 10);
         }
     }
 
     if (c == 1) {
+        currentLen -= 1;
         additionResult[currentLen] = '1';
     }
 
-    printf("Result of addition - %s\n", additionResult);
+    static char simplifiedOutput[0];
+    int currentIndex = 0;
+    for (int i = 0; i <= strlen(additionResult); i++) {
+        if (additionResult[i] != '0') {
+            simplifiedOutput[currentIndex] = additionResult[i];
+            currentIndex++;
+        }
+    }
 
-    return additionResult;
+    printf("Result of addition - %s\n", simplifiedOutput);
+
+    return simplifiedOutput;
 }
  
 
