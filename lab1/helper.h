@@ -42,13 +42,13 @@ void callAction(ACTION action, char* firstNum, char* secondNum) {
         additionNumbers(firstNum, secondNum, NOTATION);
         break;
     case DERIVATE:
-        derivateNumbers(firstNum, secondNum);
+        derivateNumbers(firstNum, secondNum, NOTATION);
         break;
     case MULTIPLY:
-        multiplyNumbers(firstNum, secondNum);
+        multiplyNumbers(firstNum, secondNum, NOTATION);
         break;
     case SUBTRACTION:
-        subtractionNumbers(firstNum, secondNum);
+        subtractionNumbers(firstNum, secondNum, NOTATION);
         break;
     default:
         printErrorMessage(INCORRECT_ACTION);

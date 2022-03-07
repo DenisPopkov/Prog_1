@@ -13,6 +13,8 @@ char* additionNumbers(char* firstNumber, char* secondNumber, unsigned short int 
     for (int i = 1; i <= diff; i++)
         strcat(s, "0");
     
+    strrev(s);
+    
     printf("First number - %s\n", firstNumber);
     printf("Second number - %s\n", secondNumber);
     
@@ -32,6 +34,7 @@ char* additionNumbers(char* firstNumber, char* secondNumber, unsigned short int 
 
         val3 = (val1 + val2 + c) % base; 
         c = (val1 + val2 + c) / base;
+        currentLen -= 1;
 
         if (val3 <= 9) {
             additionResult[currentLen] = val3 + '0';
@@ -44,8 +47,7 @@ char* additionNumbers(char* firstNumber, char* secondNumber, unsigned short int 
         additionResult[currentLen] = '1';
     }
 
-    strrev(additionResult);
-    printf("Result is - %s\n", additionResult);
+    printf("Result of addition - %s\n", additionResult);
 
     return additionResult;
 }
