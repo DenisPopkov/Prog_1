@@ -5,60 +5,60 @@
 char* additionNumbers(char* firstNumber, char* secondNumber, unsigned short int base) {
     int firstNumberLength = strlen(firstNumber);
     int secondNumberLength = strlen(secondNumber);
-
-    static char s[0];
     static char additionResult[0];
     int diff = abs(firstNumberLength - secondNumberLength);
-    
+
     printf("First number - %s\n", firstNumber);
     printf("Second number - %s\n", secondNumber);
 
-    for (int i = 1; i <= diff; i++)
-        strcat(s, "0");
-    
+    char formattedFirstNumber[10] = "";
+    char formattedSecondNumber[10] = "";
+
+    if (firstNumberLength > secondNumberLength) {
+        for (int i = 0; i <= diff - 1; i++)
+            formattedSecondNumber[i] = '0';
+    } else {
+        for (int i = 0; i <= diff - 1; i++)
+            formattedFirstNumber[i] = '0';
+    }
+
+    strcat(formattedFirstNumber, firstNumber);
+    strcat(formattedSecondNumber, secondNumber);
+
     int val1, val2, val3, c = 0;
-    int currentLen = strlen(additionResult);
+    int index = 0;
 
-    for (int i = strlen(firstNumber) - 1; i >= 0; i--) {
-        if (firstNumber[i] >= '0' && firstNumber[i] <= '9')
-            val1 = firstNumber[i] - '0';
-        else if (firstNumber[i] >= 'A' && firstNumber[i] <= 'F')
-            val1 = firstNumber[i] - 'A' + 10;
+    for (int i = strlen(formattedSecondNumber) - 1; i >= 0; i--) {
+        
+        if (formattedFirstNumber[i] >= '0' && formattedFirstNumber[i] <= '9')
+            val1 = formattedFirstNumber[i] - '0';
+        else if (formattedFirstNumber[i] >= 'A' && formattedFirstNumber[i] <= 'F')
+            val1 = formattedFirstNumber[i] - 'A' + 10;
 
-        if (secondNumber[i] >= '0' && secondNumber[i] <= '9')
-            val2 = secondNumber[i] - '0';
-        else if (secondNumber[i] >= 'A' && secondNumber[i] <= 'F')
-            val2 = secondNumber[i] - 'A' + 10;
+        if (formattedSecondNumber[i] >= '0' && formattedSecondNumber[i] <= '9') {
+            val2 = formattedSecondNumber[i] - '0';
+        } else if (formattedSecondNumber[i] >= 'A' && formattedSecondNumber[i] <= 'F') {
+            val2 = formattedSecondNumber[i] - 'A' + 10;
+        }
 
         val3 = (val1 + val2 + c) % base; 
         c = (val1 + val2 + c) / base;
 
         if (val3 <= 9) {
-            currentLen -= 1;
-            additionResult[currentLen] = val3 + '0';
+            additionResult[index++] = val3 + '0';
         } else {
-            currentLen -= 1;
-            additionResult[currentLen] = val3 + ('A' - 10);
+            additionResult[index++] = val3 + 'A' - 10;
         }
     }
 
     if (c == 1) {
-        currentLen -= 1;
-        additionResult[currentLen] = '1';
+        additionResult[index++] = '1';
     }
 
-    static char simplifiedOutput[0];
-    int currentIndex = 0;
-    for (int i = 0; i <= strlen(additionResult); i++) {
-        if (additionResult[i] != '0') {
-            simplifiedOutput[currentIndex] = additionResult[i];
-            currentIndex++;
-        }
-    }
+    strrev(additionResult);
+    printf("Result of addition - %s\n", additionResult);
 
-    printf("Result of addition - %s\n", simplifiedOutput);
-
-    return simplifiedOutput;
+    return additionResult;
 }
  
 
