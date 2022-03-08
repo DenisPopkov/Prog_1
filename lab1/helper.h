@@ -75,15 +75,6 @@ char checkRange(int number) {
         return (char)(number - 10 + 'A');
 }
 
-void stringRevert(char *str) {
-    int len = strlen(str);
-    for (int i = 0; i < len / 2; i++) {
-        char temp = str[i];
-        str[i] = str[len - i - 1];
-        str[len - i - 1] = temp;
-    }
-}
-
 char* convertNumbersToCurrentNotation(int number) {
     static char numberInCurrentNotation[10];
     int index = 0;
@@ -94,7 +85,7 @@ char* convertNumbersToCurrentNotation(int number) {
     }
 
     numberInCurrentNotation[index] = '\0';
-    stringRevert(numberInCurrentNotation);
+    strrev(numberInCurrentNotation);
 
     return numberInCurrentNotation;
 }
@@ -114,19 +105,36 @@ char* isNumber(char number[]) {
 }
 
 char* getUserFirstNumber() {
-    static char firstNumber[10];
+    char firstNumber[10];
 
     printf("Enter firstNumber: ");
-    scanf("%s", firstNumber);
+    fgets(firstNumber, 10, stdin);
 
     return isNumber(firstNumber);
 }
 
 char* getUserSecondNumber() {
-    static char secondNumber[10];
+    char secondNumber[10];
 
     printf("Enter secondNumber: ");
-    scanf("%s", secondNumber);
+    fgets(secondNumber, 10, stdin);
 
     return isNumber(secondNumber);
+}
+
+void additionTest() {
+    char *firstNumbers[5] = { "13", "17", "432", "123", "873" };
+    char *secondNumbers[5] = { "43", "18", "12", "3", "233" };
+    char *additionAnswers[5] = { "38", "23", "1BC", "7E", "452" };
+
+    for (int i = 5; i <= 0; i++) {
+        if (additionNumbers(firstNumbers[i], secondNumbers[i], 16) == additionAnswers[i]) {
+            continue;
+        } else {
+            printf("Test failed!\n");
+            break;
+        }
+    }
+
+    printf("Test passed!\n");
 }
