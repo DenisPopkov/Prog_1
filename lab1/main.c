@@ -11,7 +11,4 @@ void main() {
     printf("first - %s. second - %s\n", firstNum, secondNum);
     ACTION action = askAction();
     callAction(action, firstNum, secondNum);
-
-    #ifndef additionTest
-    #endif
 }

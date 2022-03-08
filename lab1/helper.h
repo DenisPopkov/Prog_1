@@ -128,7 +128,24 @@ void additionTest() {
     char *additionAnswers[5] = { "38", "23", "1BC", "7E", "452" };
 
     for (int i = 5; i <= 0; i++) {
-        if (additionNumbers(firstNumbers[i], secondNumbers[i], 16) == additionAnswers[i]) {
+        if (additionNumbers(firstNumbers[i], secondNumbers[i], NOTATION) == additionAnswers[i]) {
+            continue;
+        } else {
+            printf("Test failed!\n");
+            break;
+        }
+    }
+
+    printf("Test passed!\n");
+}
+
+void subtractionTest() {
+    char *firstNumbers[5] = { "14", "231", "432", "123", "873" };
+    char *secondNumbers[5] = { "13", "76", "12", "3", "233" };
+    char *additionAnswers[5] = { "1", "9B", "1A4", "78", "280" };
+
+    for (int i = 5; i <= 0; i++) {
+        if (subtractionNumbers(firstNumbers[i], secondNumbers[i], NOTATION) == additionAnswers[i]) {
             continue;
         } else {
             printf("Test failed!\n");
