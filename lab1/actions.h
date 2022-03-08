@@ -136,3 +136,16 @@ char* subtractionNumbers(char* firstNumber, char* secondNumber, unsigned short i
 
     return subtractionResult;
 }
+
+void createFile() {
+    FILE * file;
+    file = fopen("file1.txt", "w");
+
+    static char firstLine[1000000];
+    strcat(firstLine, "        base 2        base 3        base 4        base 5        base 6        base 7        base 8        base 9        base 10        base 11        base 12        base 13        base 14        base 15        base 16");
+    strcat(firstLine, "\n\n");
+    strcat(firstLine, table);
+
+    fputs(firstLine, file);
+    fclose(file);
+}

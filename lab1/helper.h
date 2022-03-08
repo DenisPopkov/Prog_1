@@ -30,8 +30,11 @@ ACTION getActionType(char type) {
     case '2':
         return MULTIPLY;
         break;
-    default:
+    case '3':
         return SUBTRACTION;
+        break;
+    default:
+        return CREATE_FILE;
         break;
     }
 }
@@ -50,6 +53,9 @@ void callAction(ACTION action, char* firstNum, char* secondNum) {
     case SUBTRACTION:
         subtractionNumbers(firstNum, secondNum, NOTATION);
         break;
+    case CREATE_FILE:
+        createFile();
+        break;
     default:
         printErrorMessage(INCORRECT_ACTION);
         break;
@@ -61,7 +67,7 @@ ACTION askAction() {
     printf(askActionMessage);
     scanf(" %c", &type);
 
-    if (type >= '0' && type <= '3') {
+    if (type >= '0' && type <= '4') {
         return getActionType(type);
     } else {
         printErrorMessage(INCORRECT_ACTION);
@@ -75,13 +81,13 @@ char checkRange(int number) {
         return (char)(number - 10 + 'A');
 }
 
-char* convertNumbersToCurrentNotation(int number) {
+char* convertNumbersToCurrentNotation(int number, int base) {
     static char numberInCurrentNotation[10];
     int index = 0;
 
     while (number > 0) {
-        numberInCurrentNotation[index++] = checkRange(number % NOTATION);
-        number /= NOTATION;
+        numberInCurrentNotation[index++] = checkRange(number % base);
+        number /= base;
     }
 
     numberInCurrentNotation[index] = '\0';
@@ -99,7 +105,7 @@ char* isNumber(char number[]) {
             printErrorMessage(INCORRECT_RANGE);
             break;
         } else {
-            return convertNumbersToCurrentNotation(atoi(number));
+            return convertNumbersToCurrentNotation(atoi(number), NOTATION);
         }
     }
 }
@@ -154,4 +160,38 @@ void subtractionTest() {
     }
 
     printf("Test passed!\n");
+}
+
+void fillTable() {
+
+    char currentLine[2];
+
+    for (int i = 1; i <= 25; i++) {
+        itoa(i, currentLine, 10);
+        strcat(table, currentLine);
+        strcat(table, "       ");
+        for (int j = 2; j <= 16; j++) {
+            
+            if (j > 10) strcat(table, " ");
+
+            if (strlen(convertNumbersToCurrentNotation(i + 1, j)) == 1) {
+                strcat(table, convertNumbersToCurrentNotation(i + 1, j));
+                strcat(table, "             ");
+            }  else if (strlen(convertNumbersToCurrentNotation(i + 1, j)) == 2) {
+                strcat(table, convertNumbersToCurrentNotation(i + 1, j));
+                strcat(table, "            ");
+            } else if (strlen(convertNumbersToCurrentNotation(i + 1, j)) == 3) {
+                strcat(table, convertNumbersToCurrentNotation(i + 1, j));
+                strcat(table, "           ");
+            } else if (strlen(convertNumbersToCurrentNotation(i + 1, j)) == 4) {
+                strcat(table, convertNumbersToCurrentNotation(i + 1, j));
+                strcat(table, "          ");
+            } else if (strlen(convertNumbersToCurrentNotation(i + 1, j)) == 5) {
+                strcat(table, convertNumbersToCurrentNotation(i + 1, j));
+                strcat(table, "         ");
+            }
+        }
+
+        strcat(table, "\n\n");
+    }
 }
