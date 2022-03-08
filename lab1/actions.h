@@ -60,17 +60,6 @@ char* additionNumbers(char* firstNumber, char* secondNumber, unsigned short int 
 
     return additionResult;
 }
- 
-
-char* derivateNumbers(char* firstNumber, char* secondNumber, unsigned short int base) {
-
-    return "";
-}
-
-char* multiplyNumbers(char* firstNumber, char* secondNumber, unsigned short int base) {
-
-    return "";
-}
 
 char* subtractionNumbers(char* firstNumber, char* secondNumber, unsigned short int base) {
     int firstNumberLength = strlen(firstNumber);

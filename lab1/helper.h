@@ -25,12 +25,6 @@ ACTION getActionType(char type) {
         return ADDITION;
         break;
     case '1':
-        return DERIVATE;
-        break;
-    case '2':
-        return MULTIPLY;
-        break;
-    case '3':
         return SUBTRACTION;
         break;
     default:
@@ -43,12 +37,6 @@ void callAction(ACTION action, char* firstNum, char* secondNum) {
     switch (action) {
     case ADDITION:
         additionNumbers(firstNum, secondNum, NOTATION);
-        break;
-    case DERIVATE:
-        derivateNumbers(firstNum, secondNum, NOTATION);
-        break;
-    case MULTIPLY:
-        multiplyNumbers(firstNum, secondNum, NOTATION);
         break;
     case SUBTRACTION:
         subtractionNumbers(firstNum, secondNum, NOTATION);
@@ -67,7 +55,7 @@ ACTION askAction() {
     printf(askActionMessage);
     scanf(" %c", &type);
 
-    if (type >= '0' && type <= '4') {
+    if (type >= '0' && type <= '1') {
         return getActionType(type);
     } else {
         printErrorMessage(INCORRECT_ACTION);
