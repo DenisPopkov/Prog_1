@@ -5,6 +5,7 @@
 
 void main() {
     fillTable();
+    createFile();
     char firstNum[10];
     char secondNum[10];
     strcpy(firstNum, getUserFirstNumber());

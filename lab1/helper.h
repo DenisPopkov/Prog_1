@@ -27,6 +27,12 @@ ACTION getActionType(char type) {
     case '1':
         return SUBTRACTION;
         break;
+    case '2':
+        return DERIVATE;
+        break;
+    case '3':
+        return MULTIPLY;
+        break;
     default:
         return CREATE_FILE;
         break;
@@ -40,6 +46,12 @@ void callAction(ACTION action, char* firstNum, char* secondNum) {
         break;
     case SUBTRACTION:
         subtractionNumbers(firstNum, secondNum, NOTATION);
+        break;
+    case DERIVATE:
+        divideNumbers(firstNum, secondNum);
+        break;
+    case MULTIPLY:
+        multiplyNumbers(firstNum, secondNum, NOTATION);
         break;
     case CREATE_FILE:
         createFile();
@@ -55,7 +67,7 @@ ACTION askAction() {
     printf(askActionMessage);
     scanf(" %c", &type);
 
-    if (type >= '0' && type <= '1') {
+    if (type >= '0' && type <= '4') {
         return getActionType(type);
     } else {
         printErrorMessage(INCORRECT_ACTION);

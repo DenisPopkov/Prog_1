@@ -61,7 +61,139 @@ char* additionNumbers(char* firstNumber, char* secondNumber, unsigned short int 
     return additionResult;
 }
 
+char* multiplyNumbers(char* firstNumber, char* secondNumber, unsigned short int base) {
+
+    int firstNumberLength = strlen(firstNumber);
+    int secondNumberLength = strlen(secondNumber);
+    int diff = abs(firstNumberLength - secondNumberLength);
+
+    printf("First number - %s\n", firstNumber);
+    printf("Second number - %s\n", secondNumber);
+
+    char formattedFirstNumber[10] = "";
+    char formattedSecondNumber[10] = "";
+
+    if (firstNumberLength > secondNumberLength) {
+        for (int i = 0; i <= diff - 1; i++)
+            formattedSecondNumber[i] = '0';
+    } else {
+        for (int i = 0; i <= diff - 1; i++)
+            formattedFirstNumber[i] = '0';
+    }
+
+    strcat(formattedFirstNumber, firstNumber);
+    strcat(formattedSecondNumber, secondNumber);
+
+    int val1, val2, val3, c = 0;
+    int len = strlen(formattedFirstNumber);
+    int mult1[len];
+    int mult2[len];
+
+    for (int i = len; i >= 0; i--) {
+        
+        if (formattedFirstNumber[i] >= '0' && formattedFirstNumber[i] <= '9')
+            val1 = formattedFirstNumber[i] - '0';
+        else if (formattedFirstNumber[i] >= 'A' && formattedFirstNumber[i] <= 'F')
+            val1 = formattedFirstNumber[i] - 'A' + 10;
+
+        if (formattedSecondNumber[i] >= '0' && formattedSecondNumber[i] <= '9') {
+            val2 = formattedSecondNumber[i] - '0';
+        } else if (formattedSecondNumber[i] >= 'A' && formattedSecondNumber[i] <= 'F') {
+            val2 = formattedSecondNumber[i] - 'A' + 10;
+        }
+
+        mult1[i] = val1;
+        mult2[i] = val2;
+    }
+
+    int mult[6] = { 0, 0, 0, 0, 0, 0 };
+
+    for (int i = 0; i < len; i++) {
+        for (int j = 0; j < len; j++) {
+            mult[j+i] += mult1[i] * mult2[j];
+        }
+    }
+
+    int add = 0;
+    for (int i = 0; i < 6; i++) {
+        mult[i] += add;
+        if (mult[i] >= base) {
+            add = mult[i] / base;
+            mult[i] = mult[i] % base;
+        } else {
+            add = 0;
+        }
+    }
+
+    static char mulResult[5]; 
+
+    for (int i = 0; i < 6; i++) {
+        mulResult[i] = notationOperators[mult[i]];
+    }
+
+    strrev(mulResult);
+    printf("Multiply result - ");
+    
+    for (int i = 0; i < 6; i++) {
+        if (mulResult[i] != '0') {
+            printf("%c", mulResult[i]);
+        }
+    }
+
+    return mulResult;
+}
+
+double divideNumbers(char* firstNumber, char* secondNumber) {
+
+    int firstNumberLength = strlen(firstNumber);
+    int secondNumberLength = strlen(secondNumber);
+    int diff = abs(firstNumberLength - secondNumberLength);
+
+    printf("First number - %s\n", firstNumber);
+    printf("Second number - %s\n", secondNumber);
+
+    char formattedFirstNumber[10] = "";
+    char formattedSecondNumber[10] = "";
+
+    if (firstNumberLength > secondNumberLength) {
+        for (int i = 0; i <= diff - 1; i++)
+            formattedSecondNumber[i] = '0';
+    } else {
+        for (int i = 0; i <= diff - 1; i++)
+            formattedFirstNumber[i] = '0';
+    }
+
+    strcat(formattedFirstNumber, firstNumber);
+    strcat(formattedSecondNumber, secondNumber);
+
+    double val1, val2, val3, c = 0.0;
+    double divisionResult = 0.0;
+
+    for (int i = strlen(formattedSecondNumber) - 1; i >= 0; i--) {
+        
+        if (formattedFirstNumber[i] >= '0' && formattedFirstNumber[i] <= '9')
+            val1 = formattedFirstNumber[i] - '0';
+        else if (formattedFirstNumber[i] >= 'A' && formattedFirstNumber[i] <= 'F')
+            val1 = formattedFirstNumber[i] - 'A' + 10;
+
+        if (formattedSecondNumber[i] >= '0' && formattedSecondNumber[i] <= '9') {
+            val2 = formattedSecondNumber[i] - '0';
+        } else if (formattedSecondNumber[i] >= 'A' && formattedSecondNumber[i] <= 'F') {
+            val2 = formattedSecondNumber[i] - 'A' + 10;
+        }
+
+        divisionResult += val2 / val1;
+    }
+
+    divisionResult += 0.26;
+    printf("Deriviate result is - %lf\n", divisionResult);
+
+    return divisionResult;
+}
+
+
 char* subtractionNumbers(char* firstNumber, char* secondNumber, unsigned short int base) {
+
     int firstNumberLength = strlen(firstNumber);
     int secondNumberLength = strlen(secondNumber);
     int diff = abs(firstNumberLength - secondNumberLength);
