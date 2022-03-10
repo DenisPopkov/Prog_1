@@ -166,26 +166,24 @@ double divideNumbers(char* firstNumber, char* secondNumber) {
     strcat(formattedFirstNumber, firstNumber);
     strcat(formattedSecondNumber, secondNumber);
 
-    double val1, val2, val3, c = 0.0;
-    double divisionResult = 0.0;
+    double val1, val2, divisionResult = 0.0;
 
     for (int i = strlen(formattedSecondNumber) - 1; i >= 0; i--) {
         
         if (formattedFirstNumber[i] >= '0' && formattedFirstNumber[i] <= '9')
-            val1 = formattedFirstNumber[i] - '0';
+            val1 += formattedFirstNumber[i] - '0';
         else if (formattedFirstNumber[i] >= 'A' && formattedFirstNumber[i] <= 'F')
-            val1 = formattedFirstNumber[i] - 'A' + 10;
+            val1 += formattedFirstNumber[i] - 'A' + 10;
 
         if (formattedSecondNumber[i] >= '0' && formattedSecondNumber[i] <= '9') {
-            val2 = formattedSecondNumber[i] - '0';
+            val2 += formattedSecondNumber[i] - '0';
         } else if (formattedSecondNumber[i] >= 'A' && formattedSecondNumber[i] <= 'F') {
-            val2 = formattedSecondNumber[i] - 'A' + 10;
+            val2 += formattedSecondNumber[i] - 'A' + 10;
         }
-
-        divisionResult += val2 / val1;
     }
 
-    divisionResult += 0.26;
+    divisionResult += val2 / val1;
+
     printf("Deriviate result is - %lf\n", divisionResult);
 
     return divisionResult;
